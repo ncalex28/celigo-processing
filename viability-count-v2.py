@@ -48,8 +48,8 @@ with st.form("celigo_data_input"):
     st.write("Paste table below for live cells:")
     edited_df_input_live = st.data_editor(df_template, num_rows="dynamic", key= "live_editor")
 
-    submitted = st.form_submit_button("Submit")
-    if submitted:
+    submitted1 = st.form_submit_button("Submit")
+    if submitted1:
         # Convert to numpy array and integers as needed
         edited_df_layout = edited_df_input_layout.to_numpy()
         edited_df_dead = edited_df_input_dead.to_numpy().astype(int)
@@ -69,14 +69,11 @@ with st.form("celigo_data_input"):
         st.write("Viability Summary:")
         st.write(viability_summary)
 
-with st.form("reorder"):
-    if not submitted:
-        st.write("Please enter data above")
-    if submitted:
-        st.write("Re-order conditions:")
-        df_results_reorder= st.data_editor(pd.DataFrame({"Condition": df_results["Condition"].unique(), "Condition #": 0}))             
-        submitted = st.form_submit_button("Submit")
-  
-    if submitted:
-        st.write(df_results_reorder)
+        with st.form("reorder"):
+            st.write("Re-order conditions:")
+            df_results_reorder= st.data_editor(pd.DataFrame({"Condition": df_results["Condition"].unique(), "Condition #": 0}))             
+            submitted2 = st.form_submit_button("Submit")
+            if submitted2:
+                st.write(df_results_reorder)
+ 
         
