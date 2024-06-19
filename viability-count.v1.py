@@ -36,29 +36,33 @@ st.title("Celigo Cell Viability and Cell Count Analysis")
 st.divider()
 # st.write("Paste cell line information along with the number of vials being added to inventory.")
 
-st.write("Paste plate layout below for experimental conditions:")
-edited_df_input_layout = st.data_editor(df_template, num_rows="dynamic", key= "layout_editor")
+with st.form(celigo-data-input):
+    st.write("Paste plate layout below for experimental conditions:")
+    edited_df_input_layout = st.data_editor(df_template, num_rows="dynamic", key= "layout_editor")
+    
+    st.write("Paste table below for dead cells:")
+    edited_df_input_dead = st.data_editor(df_template, num_rows="dynamic", key= "dead_editor")
+    
+    st.write("Paste table below for live cells:")
+    edited_df_input_live = st.data_editor(df_template, num_rows="dynamic", key= "live_editor")
 
-st.write("Paste table below for dead cells:")
-edited_df_input_dead = st.data_editor(df_template, num_rows="dynamic", key= "dead_editor")
-
-st.write("Paste table below for live cells:")
-edited_df_input_live = st.data_editor(df_template, num_rows="dynamic", key= "live_editor")
-
-# Ensure numerical values for calculations
-edited_df_input_layout = edited_df_input_layout.to_numpy()
-edited_df_input_dead = edited_df_input_dead.to_numpy()
-edited_df_input_live = edited_df_input_live.to_numpy()
-
-# Flattedn and combine tables
-df_results= flat_df(Condition = edited_df_input_layout, Dead = edited_df_input_dead, Live = edited_df_input_live)
-
-# Add viability
-df_results["Viability (%)"] = (df_results["Live"]/(df_results["Live"] + df_results["Dead"])) * 100
-
-# Group by Condition and calculate mean viability
-viability_summary = df_results.groupby("Condition")["Viability (%)"].mean().reset_index()
-
-# Display results
-st.write("Viability Summary:")
-st.write(viability_summary)
+    submitted = st.form_submit_button("Submit"):
+    if submitted:
+      
+        # Ensure numerical values for calculations
+        edited_df_input_layout = edited_df_input_layout.to_numpy()
+        edited_df_input_dead = edited_df_input_dead.to_numpy()
+        edited_df_input_live = edited_df_input_live.to_numpy()
+        
+        # Flattedn and combine tables
+        df_results= flat_df(Condition = edited_df_input_layout, Dead = edited_df_input_dead, Live = edited_df_input_live)
+        
+        # Add viability
+        df_results["Viability (%)"] = (df_results["Live"]/(df_results["Live"] + df_results["Dead"])) * 100
+        
+        # Group by Condition and calculate mean viability
+        viability_summary = df_results.groupby("Condition")["Viability (%)"].mean().reset_index()
+        
+        # Display results
+        st.write("Viability Summary:")
+        st.write(viability_summary)
