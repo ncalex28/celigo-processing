@@ -70,7 +70,7 @@ with st.form("celigo_data_input"):
         st.write(viability_summary)
 
 with st.form("reorder"):
-    if not submitted_1:
+    if not submitted1:
         st.stop()
     st.write("Re-order conditions:")
     df_results_reorder= st.data_editor(pd.DataFrame({"Condition": df_results["Condition"].unique(), "Condition #": int(0)}))             
