@@ -37,13 +37,13 @@ st.divider()
 # st.write("Paste cell line information along with the number of vials being added to inventory.")
 
 st.write("Paste plate layout below for experimental conditions:")
-edited_df_input_layout = st.data_editor(df_template, num_rows="dynamic", key= layout_editor)
+edited_df_input_layout = st.data_editor(df_template, num_rows="dynamic", key= "layout_editor")
 
 st.write("Paste table below for dead cells:")
-edited_df_input_dead = st.data_editor(df_template, num_rows="dynamic", key= dead_editor)
+edited_df_input_dead = st.data_editor(df_template, num_rows="dynamic", key= "dead_editor")
 
 st.write("Paste table below for live cells:")
-edited_df_input_live = st.data_editor(df_template, num_rows="dynamic", key= live_editor)
+edited_df_input_live = st.data_editor(df_template, num_rows="dynamic", key= "live_editor")
 
 # Ensure numerical values for calculations
 df_results["Dead"] = pd.to_numeric(df_results["Dead"], errors='coerce').fillna(0)
