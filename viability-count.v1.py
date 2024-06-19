@@ -45,12 +45,15 @@ edited_df_input_dead = st.data_editor(df_template, num_rows="dynamic", key= "dea
 st.write("Paste table below for live cells:")
 edited_df_input_live = st.data_editor(df_template, num_rows="dynamic", key= "live_editor")
 
+# Flattedn and combine tables
+df_results= flat_df(Condition = edited_df_input_layout, Dead = edited_df_input_dead, Live = edited_df_input_live)
+
 # Ensure numerical values for calculations
 df_results["Dead"] = pd.to_numeric(df_results["Dead"], errors='coerce').fillna(0)
 df_results["Live"] = pd.to_numeric(df_results["Live"], errors='coerce').fillna(0)
 
-df_results= flat_df(Condition = edited_df_input_layout, Dead = edited_df_input_dead, Live = edited_df_input_live)  # flatten and combine tables
-df_results["Viability (%)"] = (df_results["Live"]/(df_results["Live"] + df_results["Dead"])) * 100  # Add viability column
+# Add viability
+df_results["Viability (%)"] = (df_results["Live"]/(df_results["Live"] + df_results["Dead"])) * 100
 
 # Group by Condition and calculate mean viability
 viability_summary = df_results.groupby("Condition")["Viability (%)"].mean().reset_index()
