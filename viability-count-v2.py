@@ -55,9 +55,9 @@ with st.form("celigo_data_input"):
         edited_df_dead = edited_df_input_dead.to_numpy().astype(int)
         edited_df_live = edited_df_input_live.to_numpy().astype(int)
         
-        # Flattedn and combine tables
+        # Flatten and combine tables, rename columns
         df_results= flat_df(Condition = edited_df_layout, Dead = edited_df_dead, Live = edited_df_live)
-        df_results.rename(columns={"Dead" : "Dead Cell Count", "Live" : "Live Cell Count"})
+        df_results= df_results.rename(columns={"Dead" : "Dead Cell Count", "Live" : "Live Cell Count"})
         
         # Add viability
         df_results["Viability (%)"] = (df_results["Live Cell Count"]/(df_results["Live Cell Count"] + df_results["Dead Cell Count"])) * 100
