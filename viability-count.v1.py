@@ -1,6 +1,8 @@
 import numpy as np
 import pandas as pd
 import streamlit as st
+import matplotlib.pyplot as plt
+import seaborn as sns
 
 ## Functions
 def flat_df(**kwargs):
@@ -65,3 +67,10 @@ with st.form("celigo_data_input"):
         # Display results
         st.write("Viability Summary:")
         st.write(viability_summary)
+
+# with st.form("figures"
+#     st.write("Generate figures:")
+             
+#     submitted = st.form_submit_button("Submit")
+#     if submitted:
+        
