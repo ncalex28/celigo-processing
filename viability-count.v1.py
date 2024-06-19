@@ -36,20 +36,18 @@ st.title("Celigo Cell Viability and Cell Count Analysis")
 st.divider()
 # st.write("Paste cell line information along with the number of vials being added to inventory.")
 
-with st.form("celigo_data"):
-    st.write("Paste plate layout below for experimental conditions:")
-    edited_df_input_layout = st.data_editor(df_template, num_rows="dynamic")
 
-    st.write("Paste table below for dead cells:")
-    edited_df_input_dead = st.data_editor(df_template, num_rows="dynamic")
+st.write("Paste plate layout below for experimental conditions:")
+edited_df_input_layout = st.data_editor(df_template, num_rows="dynamic")
 
-    st.write("Paste table below for live cells:")
-    edited_df_input_live = st.data_editor(df_template, num_rows="dynamic")
+st.write("Paste table below for dead cells:")
+edited_df_input_dead = st.data_editor(df_template, num_rows="dynamic")
 
-    submitted = st.form_submit_button("Submit")
+st.write("Paste table below for live cells:")
+edited_df_input_live = st.data_editor(df_template, num_rows="dynamic")
 
-    if submitted:
-        df_results= flat_df(Condition = edited_df_input_layout, Dead = edited_df_input_dead, Live = edited_df_input_live)  # flatten and combine tables
-        df_results["Viability (%)"] = (df_results["Live"]/(df_results["Live"] + df_results["Dead"])) * 100  # Add viability column
-      
-        st.data_editor(df_results.groupby("Condition")["Viability (%)"], num_rows="dynamic")
+
+df_results= flat_df(Condition = edited_df_input_layout, Dead = edited_df_input_dead, Live = edited_df_input_live)  # flatten and combine tables
+df_results["Viability (%)"] = (df_results["Live"]/(df_results["Live"] + df_results["Dead"])) * 100  # Add viability column
+
+st.data_editor(df_results.groupby("Condition")["Viability (%)"], num_rows="dynamic")
