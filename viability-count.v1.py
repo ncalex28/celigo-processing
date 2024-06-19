@@ -46,6 +46,7 @@ st.write("Paste table below for live cells:")
 edited_df_input_live = st.data_editor(df_template, num_rows="dynamic", key= "live_editor")
 
 # Ensure numerical values for calculations
+edited_df_input_layout = edited_df_input_layout.to_numpy()
 edited_df_input_dead = edited_df_input_dead.to_numpy()
 edited_df_input_live = edited_df_input_live.to_numpy()
 
