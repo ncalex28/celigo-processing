@@ -36,7 +36,7 @@ st.title("Celigo Cell Viability and Cell Count Analysis")
 st.divider()
 # st.write("Paste cell line information along with the number of vials being added to inventory.")
 
-with st.form(celigo-data-input):
+with st.form("celigo_data_input"):
     st.write("Paste plate layout below for experimental conditions:")
     edited_df_input_layout = st.data_editor(df_template, num_rows="dynamic", key= "layout_editor")
     
