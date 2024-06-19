@@ -69,7 +69,7 @@ with st.form("celigo_data_input"):
         st.write("Viability Summary:")
         st.write(viability_summary)
 
-with st.form("figures"
+with st.form("reorder")
     st.write("Re-order conditions:")
     df_results_reorder= st.data_editor(pd.DataFrame({"Condition": df_results["Condition"].unique(), "Condition #": 0}))             
     submitted = st.form_submit_button("Submit")
