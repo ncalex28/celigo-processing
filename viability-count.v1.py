@@ -48,11 +48,10 @@ with st.form("celigo_data_input"):
 
     submitted = st.form_submit_button("Submit")
     if submitted:
-      
-        # Ensure numerical values for calculations
+        # Convert to numpy array and integers as needed
         edited_df_input_layout = edited_df_input_layout.to_numpy()
-        edited_df_input_dead = edited_df_input_dead.to_numpy()
-        edited_df_input_live = edited_df_input_live.to_numpy()
+        edited_df_input_dead = edited_df_input_dead.to_numpy().astype(int)
+        edited_df_input_live = edited_df_input_live.to_numpy().astype(int)
         
         # Flattedn and combine tables
         df_results= flat_df(Condition = edited_df_input_layout, Dead = edited_df_input_dead, Live = edited_df_input_live)
