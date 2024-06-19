@@ -46,7 +46,7 @@ with st.form(celigo-data-input):
     st.write("Paste table below for live cells:")
     edited_df_input_live = st.data_editor(df_template, num_rows="dynamic", key= "live_editor")
 
-    submitted = st.form_submit_button("Submit"):
+    submitted = st.form_submit_button("Submit")
     if submitted:
       
         # Ensure numerical values for calculations
