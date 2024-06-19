@@ -52,6 +52,6 @@ with st.form("celigo_data"):
 
     if submitted:
         df_results= flat_df(Condition = edited_df_input_layout, Dead = edited_df_input_dead, Live = edited_df_input_live)  # flatten and combine tables
-        df_results["Viability (%)] = (df_results["Live"]/(df_results["Live"] + df_results["Dead"])) * 100  # Add viability column
+        df_results["Viability (%)"] = (df_results["Live"]/(df_results["Live"] + df_results["Dead"])) * 100  # Add viability column
       
         st.data_editor(df_results.groupby("Condition")["Viability (%)"], num_rows="dynamic")
