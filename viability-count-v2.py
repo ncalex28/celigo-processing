@@ -71,7 +71,7 @@ with st.form("celigo_data_input"):
 
         with st.form("reorder"):
             st.write("Re-order conditions:")
-            df_results_reorder= st.data_editor(pd.DataFrame({"Condition": df_results["Condition"].unique(), "Condition #": 0}))             
+            df_results_reorder= st.data_editor(pd.DataFrame({"Condition": df_results["Condition"].unique(), "Condition #": int(0)}))             
             submitted2 = st.form_submit_button("Submit")
             if submitted2:
                 st.write(df_results_reorder)
